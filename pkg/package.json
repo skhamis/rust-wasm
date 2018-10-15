@@ -1,0 +1,15 @@
+{
+  "name": "rust-wasm-game",
+  "collaborators": [
+    "skhamis"
+  ],
+  "version": "0.1.0",
+  "files": [
+    "rust_wasm_game_bg.wasm",
+    "rust_wasm_game.js",
+    "rust_wasm_game.d.ts"
+  ],
+  "module": "rust_wasm_game.js",
+  "types": "rust_wasm_game.d.ts",
+  "sideEffects": "false"
+}
