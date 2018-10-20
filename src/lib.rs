@@ -2,10 +2,19 @@ extern crate cfg_if;
 extern crate wasm_bindgen;
 
 mod utils;
-mod display;
 
 use wasm_bindgen::prelude::*;
 use std::fmt;
+
+#[wasm_bindgen]
+extern {
+    #[wasm_bindgen(js_namespace = console)]
+    fn log(msg: &str);
+}
+
+macro_rules! log {
+    ($($t:tt)*) => (log(&format!($($t)*)))
+}
 
 #[wasm_bindgen]
 #[repr(u8)]
@@ -50,6 +59,20 @@ impl Universe {
         self.to_string()
     }
 
+    pub fn width(&self) -> u32 {
+        return self.width
+    }
+
+    pub fn height(&self) -> u32 {
+        return self.height
+    }
+
+    pub fn cells(&self) -> *const Cell {
+        return self.cells.as_ptr()
+    }
+
+
+
     pub fn tick(&mut self) {
         let mut next = self.cells.clone();
 
@@ -58,6 +81,11 @@ impl Universe {
                 let idx = self.get_index(row, col);
                 let cell = self.cells[idx];
                 let live_neighbors = self.live_neighbor_count(row, col);
+
+                // log!(
+                //     "cell[{}, {}] is initially {:?} and has {} live neighbors",
+                //     row, col, cell, live_neighbors
+                // );
 
                 let next_cell = match (cell, live_neighbors) {
                     //(Rule #1: underpop) neighbors < 2
@@ -72,6 +100,8 @@ impl Universe {
                     (otherwise, _) => otherwise, 
                 };
                 next[idx] = next_cell;
+
+              //  log!("    it becomes {:?}", next_cell);
             }
         }
         self.cells = next;

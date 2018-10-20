@@ -6,6 +6,12 @@ static  new(): Universe;
 
  render(): string;
 
+ width(): number;
+
+ height(): number;
+
+ cells(): number;
+
  tick(): void;
 
 }

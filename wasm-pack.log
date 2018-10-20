@@ -283,3 +283,36 @@ error: Could not compile `rust-wasm-game`.
 
 To learn more, run the command again with --verbose.
 
+Oct 19 17:12:35.759 ERRO Compilation of your program failed. stderr:
+
+   Compiling rust-wasm-game v0.1.0 (/mnt/c/Users/Sammy/Documents/coding/rust/rust-wasm-game)
+error[E0583]: file not found for module `display`
+ --> src/lib.rs:5:5
+  |
+5 | mod display;
+  |     ^^^^^^^
+  |
+  = help: name the file either display.rs or display/mod.rs inside the directory "src"
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0583`.
+error: Could not compile `rust-wasm-game`.
+
+To learn more, run the command again with --verbose.
+
+Oct 20 12:42:43.097 ERRO Compilation of your program failed. stderr:
+
+   Compiling rust-wasm-game v0.1.0 (/mnt/c/Users/Sammy/Documents/coding/rust/rust-wasm-game)
+error: missing fragment specifier
+  --> src/lib.rs:16:8
+   |
+16 |     ($t($t:tt)*) => (log(&format!($($t)*)))
+   |        ^^^^^^^
+
+error: aborting due to previous error
+
+error: Could not compile `rust-wasm-game`.
+
+To learn more, run the command again with --verbose.
+
