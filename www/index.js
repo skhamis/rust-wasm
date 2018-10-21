@@ -7,7 +7,7 @@ const DEAD_COLOR =  "#FFFFFF";
 const ALIVE_COLOR = "#000000";
 
 //const pre = document.getElementById("game-of-life-canvas");
-const universe = Universe.new();
+let universe = Universe.new();
 const u_width = universe.width();
 const u_height = universe.height();
 
@@ -26,6 +26,7 @@ const isPaused = () => {
 }
 
 const playPauseButton = document.getElementById("play-pause-btn");
+const restartButton = document.getElementById("restart-btn");
 
 const Play = () => {
   playPauseButton.textContent = "Pause the game";
@@ -37,6 +38,16 @@ const Pause = () => {
   cancelAnimationFrame(animationId);
   animationId = null;
 };
+
+const Restart = () => {
+  Pause();
+  universe = Universe.new();
+  Play();
+}
+
+restartButton.addEventListener("click", event => {
+  Restart();
+});
 
 playPauseButton.addEventListener("click", event => {
   isPaused() ? Play() : Pause();
