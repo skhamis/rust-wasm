@@ -71,8 +71,6 @@ impl Universe {
         return self.cells.as_ptr()
     }
 
-
-
     pub fn tick(&mut self) {
         let mut next = self.cells.clone();
 

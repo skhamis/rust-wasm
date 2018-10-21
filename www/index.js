@@ -17,18 +17,31 @@ canvas.height = (CELL_SIZE + 1) * u_height + 1;
 canvas.width = (CELL_SIZE + 1) * u_width + 1;
 
 const ctx = canvas.getContext('2d');
+let animationId = null;
 
-const renderLoop = () => {
-  // pre.textContent = universe.render();
-  universe.tick();
 
-  drawGrid();
-  drawCells();
+//Play pause section
+const isPaused = () => {
+  return animationId === null;
+}
 
-  requestAnimationFrame(renderLoop);
+const playPauseButton = document.getElementById("play-pause-btn");
+
+const Play = () => {
+  playPauseButton.textContent = "Pause the game";
+  renderLoop();
 };
 
-requestAnimationFrame(renderLoop);
+const Pause = () => {
+  playPauseButton.textContent = "Resume";
+  cancelAnimationFrame(animationId);
+  animationId = null;
+};
+
+playPauseButton.addEventListener("click", event => {
+  isPaused() ? Play() : Pause();
+});
+
 
 const getIndex = (row, column) => {
   return row * u_width + column;
@@ -81,3 +94,19 @@ const drawCells = () => {
 
   ctx.stroke();
 };
+
+
+//Main animation loops
+const renderLoop = () => {
+  // pre.textContent = universe.render();
+  universe.tick();
+
+  drawGrid();
+  drawCells();
+
+  animationId = requestAnimationFrame(renderLoop);
+};
+
+//Start the game
+Play();
+
